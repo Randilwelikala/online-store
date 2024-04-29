@@ -9,22 +9,19 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author Acer
  */
-@WebServlet(urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/AdminManagementServlet"})
+public class AdminManagementServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +44,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet AdminManagementServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminManagementServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,47 +80,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String action = request.getParameter("action");
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
         
         try {
-            // Load MySQL JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            // Establish connection to MySQL database
             try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-                // Check if the user is an admin
-                boolean isAdmin = checkAdmin(connection, username, password);
-                if (isAdmin) {
-                    // Set session attribute for admin
-                    HttpSession session = request.getSession();
-                    session.setAttribute("username", username);
-                    session.setAttribute("isAdmin", true);
-
-                    // Check if the admin is a super admin
-                    boolean isSuperAdmin = checkSuperAdmin(connection, username);
-                    session.setAttribute("isSuperAdmin", isSuperAdmin);
-
-                    // Redirect to dashboard for admin
-                    response.sendRedirect("dashboard.jsp");
-                } else {
-                    // Check if the user is a regular user
-                    boolean isUser = checkUser(connection, username, password);
-                    if (isUser) {
-                        // Set session attribute for regular user
-                        HttpSession session = request.getSession();
-                        session.setAttribute("username", username);
-                        session.setAttribute("isAdmin", false);
-                        session.setAttribute("isSuperAdmin", false);
-
-                        // Redirect to home page for regular user
-                        response.sendRedirect("home.jsp");
-                    } else {
-                        // Invalid credentials, forward back to login page with error message
-                        request.setAttribute("error", "Invalid username or password");
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
-                    }
+                if (action.equals("approve")) {
+                    approveAdminRequest(connection, username);
+                } else if (action.equals("reject")) {
+                    rejectAdminRequest(connection, username);
                 }
+                response.sendRedirect("admin_requests.jsp");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
@@ -131,42 +100,26 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    // Method to check if the user is an admin
-    private boolean checkAdmin(Connection connection, String username, String password) throws SQLException {
-        String sql = "SELECT * FROM admins WHERE username = ? AND password = ?";
+    private void approveAdminRequest(Connection connection, String username) throws SQLException {
+        String sql = "INSERT INTO admins (username, password) SELECT username, password FROM admin_requests WHERE username = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next();
-            }
+            preparedStatement.executeUpdate();
         }
+        deleteAdminRequest(connection, username);
     }
 
-    // Method to check if the user is a regular user
-    private boolean checkUser(Connection connection, String username, String password) throws SQLException {
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    private void rejectAdminRequest(Connection connection, String username) throws SQLException {
+        deleteAdminRequest(connection, username);
+    }
+
+    private void deleteAdminRequest(Connection connection, String username) throws SQLException {
+        String sql = "DELETE FROM admin_requests WHERE username = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next();
-            }
+            preparedStatement.executeUpdate();
         }
     }
-
-    // Method to check if the admin is a super admin
-    private boolean checkSuperAdmin(Connection connection, String username) throws SQLException {
-        String sql = "SELECT * FROM admins WHERE username = ? AND is_super_admin = true";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next();
-            }
-        }
-    }
-
-
     
 
     /**
