@@ -60,7 +60,7 @@ public final class signup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                var address = document.getElementById(\"address\").value.trim();\n");
       out.write("                var phone = document.getElementById(\"phone\").value.trim();\n");
       out.write("                var termsChecked = document.getElementById(\"terms\").checked;\n");
-      out.write("\n");
+      out.write("                var adminRequest = document.getElementById(\"adminRequest\").checked;\n");
       out.write("                // Validate full name\n");
       out.write("                if (fullName === \"\") {\n");
       out.write("                    alert(\"Please enter your full name.\");\n");
