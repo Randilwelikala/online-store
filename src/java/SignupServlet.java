@@ -88,7 +88,7 @@ public class SignupServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        boolean adminRequest = request.getParameter("adminRequest") != null;
+        
 
         // Insert user data into the database
         try {
@@ -98,8 +98,8 @@ public class SignupServlet extends HttpServlet {
             // Establish connection to MySQL database
             try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
                 // Create SQL INSERT statement
-                String sql = "INSERT INTO users (full_name, email, password, username, dob, address, phone,admin_request) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO users (full_name, email, password, username, dob, address) "
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
                 
                 // Create prepared statement
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -110,7 +110,7 @@ public class SignupServlet extends HttpServlet {
                     preparedStatement.setString(5, dob);
                     preparedStatement.setString(6, address);
                     preparedStatement.setString(7, phone);
-                    preparedStatement.setBoolean(8, adminRequest);
+                    
                     
                     // Execute the statement
                     int rowsInserted = preparedStatement.executeUpdate();
