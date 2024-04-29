@@ -60,7 +60,7 @@ public final class signup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                var address = document.getElementById(\"address\").value.trim();\n");
       out.write("                var phone = document.getElementById(\"phone\").value.trim();\n");
       out.write("                var termsChecked = document.getElementById(\"terms\").checked;\n");
-      out.write("                var adminRequest = document.getElementById(\"adminRequest\").checked;\n");
+      out.write("                \n");
       out.write("                // Validate full name\n");
       out.write("                if (fullName === \"\") {\n");
       out.write("                    alert(\"Please enter your full name.\");\n");
@@ -141,9 +141,7 @@ public final class signup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <input type=\"checkbox\" id=\"terms\" name=\"terms\" required>\n");
       out.write("            <label for=\"terms\">I agree to the Terms of Service and Privacy Policy</label><br>\n");
       out.write("            \n");
-      out.write("            <!-- Additional field for requesting admin privileges -->\n");
-      out.write("            <input type=\"checkbox\" id=\"adminRequest\" name=\"adminRequest\">\n");
-      out.write("            <label for=\"adminRequest\">Request Admin Privileges</label><br>\n");
+      out.write("            \n");
       out.write("        \n");
       out.write("            <button type=\"submit\">Signup</button>\n");
       out.write("        </form>\n");

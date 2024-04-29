@@ -98,7 +98,7 @@ public class SignupServlet extends HttpServlet {
             // Establish connection to MySQL database
             try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
                 // Create SQL INSERT statement
-                String sql = "INSERT INTO users (full_name, email, password, username, dob, address) "
+                String sql = "INSERT INTO users (full_name, email, password, username, dob, address,phone) "
                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
                 
                 // Create prepared statement
