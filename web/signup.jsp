@@ -21,7 +21,7 @@
                 var address = document.getElementById("address").value.trim();
                 var phone = document.getElementById("phone").value.trim();
                 var termsChecked = document.getElementById("terms").checked;
-                var adminRequest = document.getElementById("adminRequest").checked;
+                
                 // Validate full name
                 if (fullName === "") {
                     alert("Please enter your full name.");
@@ -102,9 +102,7 @@
             <input type="checkbox" id="terms" name="terms" required>
             <label for="terms">I agree to the Terms of Service and Privacy Policy</label><br>
             
-            <!-- Additional field for requesting admin privileges -->
-            <input type="checkbox" id="adminRequest" name="adminRequest">
-            <label for="adminRequest">Request Admin Privileges</label><br>
+            
         
             <button type="submit">Signup</button>
         </form>
