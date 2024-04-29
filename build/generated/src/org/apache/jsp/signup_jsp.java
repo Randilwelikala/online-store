@@ -140,7 +140,11 @@ public final class signup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("            <input type=\"checkbox\" id=\"terms\" name=\"terms\" required>\n");
       out.write("            <label for=\"terms\">I agree to the Terms of Service and Privacy Policy</label><br>\n");
-      out.write("\n");
+      out.write("            \n");
+      out.write("            <!-- Additional field for requesting admin privileges -->\n");
+      out.write("            <input type=\"checkbox\" id=\"adminRequest\" name=\"adminRequest\">\n");
+      out.write("            <label for=\"adminRequest\">Request Admin Privileges</label><br>\n");
+      out.write("        \n");
       out.write("            <button type=\"submit\">Signup</button>\n");
       out.write("        </form>\n");
       out.write("    </body>\n");
