@@ -5,7 +5,6 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  *
@@ -32,6 +32,7 @@ public class AdminSignupServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/onlinestore";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
@@ -87,17 +88,13 @@ public class AdminSignupServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
+        String terms = request.getParameter("terms");
 
-        // Insert admin request data into the database
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-                String sql = "INSERT INTO admin_requests (full_name, email, password, username, dob, address, phone) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                String sql = "INSERT INTO admin_requests (full_name, email, password, username, dob, address, phone) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-                String sql = "INSERT INTO admin_requests (full_name, email, password, username, dob, address, phone) "
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO admin_requests (full_name, email, password, username, dob, address, phone, terms_accepted) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, fullName);
@@ -107,11 +104,12 @@ public class AdminSignupServlet extends HttpServlet {
                     preparedStatement.setString(5, dob);
                     preparedStatement.setString(6, address);
                     preparedStatement.setString(7, phone);
+                    preparedStatement.setBoolean(8, true);
 
                     int rowsInserted = preparedStatement.executeUpdate();
 
                     if (rowsInserted > 0) {
-                        response.sendRedirect("admin_confirm.jsp"); // Redirect to confirmation page
+                        response.sendRedirect("LoginAsAdmin.jsp"); // Redirect to confirmation page
                     } else {
                         response.sendRedirect("signup.jsp?error=signup_failed");
                     }
@@ -122,7 +120,7 @@ public class AdminSignupServlet extends HttpServlet {
             response.sendRedirect("signup.jsp?error=database_error");
         }
     }
-        
+
     
 
     /**
