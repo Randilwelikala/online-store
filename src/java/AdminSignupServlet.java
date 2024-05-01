@@ -109,7 +109,7 @@ public class AdminSignupServlet extends HttpServlet {
                     int rowsInserted = preparedStatement.executeUpdate();
 
                     if (rowsInserted > 0) {
-                        response.sendRedirect("LoginAsAdmin.jsp"); // Redirect to confirmation page
+                        response.sendRedirect("AdminWaiting.jsp"); // Redirect to confirmation page
                     } else {
                         response.sendRedirect("signup.jsp?error=signup_failed");
                     }
@@ -117,7 +117,7 @@ public class AdminSignupServlet extends HttpServlet {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
-            response.sendRedirect("AdminWating.jsp?error=database_error");
+            response.sendRedirect("AdminWatingmana.jsp?error=database_error");
         }
     }
 
