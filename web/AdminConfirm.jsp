@@ -12,7 +12,8 @@
         <title>Admin Request Confirmation</title>
     </head>
     <body>
-        <h2>Admin Request Confirmation</h2>
-        <p>Your admin request has been received. We will review it shortly.</p>
+    <h2>Admin Confirmation Page</h2>
+    <p>Admin request accepted successfully!</p>
+    <!-- Add any additional content or links as needed -->
     </body>
 </html>

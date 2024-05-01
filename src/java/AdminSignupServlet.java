@@ -117,7 +117,7 @@ public class AdminSignupServlet extends HttpServlet {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
-            response.sendRedirect("signup.jsp?error=database_error");
+            response.sendRedirect("AdminWating.jsp?error=database_error");
         }
     }
 

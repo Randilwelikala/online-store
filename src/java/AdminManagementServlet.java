@@ -5,16 +5,17 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  *
@@ -81,46 +82,71 @@ public class AdminManagementServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String action = request.getParameter("action");
-        String username = request.getParameter("username");
-        
+        int requestId = Integer.parseInt(request.getParameter("requestId"));
+
+        if (action.equals("accept")) {
+            acceptRequest(requestId, response);
+        } else if (action.equals("delete")) {
+            deleteRequest(requestId, response);
+        }
+    }
+
+    private void acceptRequest(int requestId, HttpServletResponse response) throws IOException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
             try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
-                if (action.equals("approve")) {
-                    approveAdminRequest(connection, username);
-                } else if (action.equals("reject")) {
-                    rejectAdminRequest(connection, username);
+                // Get admin request details
+                String selectSql = "SELECT * FROM admin_requests WHERE request_id = ?";
+                try (PreparedStatement selectStatement = connection.prepareStatement(selectSql)) {
+                    selectStatement.setInt(1, requestId);
+                    ResultSet resultSet = selectStatement.executeQuery();
+                    if (resultSet.next()) {
+                        // Move request to admins table
+                        String insertSql = "INSERT INTO admins (full_name, email, password, username) "
+                                + "VALUES (?, ?, ?, ?)";
+                        try (PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+                            insertStatement.setString(1, resultSet.getString("full_name"));
+                            insertStatement.setString(2, resultSet.getString("email"));
+                            insertStatement.setString(3, resultSet.getString("password"));
+                            insertStatement.setString(4, resultSet.getString("username"));
+                            int rowsInserted = insertStatement.executeUpdate();
+                            if (rowsInserted > 0) {
+                                // Delete request from admin_requests table
+                                String deleteSql = "DELETE FROM admin_requests WHERE request_id = ?";
+                                try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                                    deleteStatement.setInt(1, requestId);
+                                    deleteStatement.executeUpdate();
+                                    response.sendRedirect("AdminConfirm.jsp");
+                                }
+                            } else {
+                                response.sendRedirect("signup.jsp?error=signup_failed");
+                            }
+                        }
+                    }
                 }
-                response.sendRedirect("admin_requests.jsp");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("signup.jsp?error=database_error");
         }
     }
 
-    private void approveAdminRequest(Connection connection, String username) throws SQLException {
-        String sql = "INSERT INTO admins (username, password) SELECT username, password FROM admin_requests WHERE username = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
-            preparedStatement.executeUpdate();
-        }
-        deleteAdminRequest(connection, username);
-    }
-
-    private void rejectAdminRequest(Connection connection, String username) throws SQLException {
-        deleteAdminRequest(connection, username);
-    }
-
-    private void deleteAdminRequest(Connection connection, String username) throws SQLException {
-        String sql = "DELETE FROM admin_requests WHERE username = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
-            preparedStatement.executeUpdate();
+    private void deleteRequest(int requestId, HttpServletResponse response) throws IOException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD)) {
+                String deleteSql = "DELETE FROM admin_requests WHERE request_id = ?";
+                try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                    deleteStatement.setInt(1, requestId);
+                    deleteStatement.executeUpdate();
+                    response.sendRedirect("AdminRequests.jsp");
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            response.sendRedirect("AdminRequests.jsp?error=database_error");
         }
     }
-    
 
     /**
      * Returns a short description of the servlet.
