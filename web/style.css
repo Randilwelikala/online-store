@@ -1,0 +1,312 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(0, 0, 0);
+    min-height: auto;
+    
+}
+header{
+    position:sticky;
+    width: 100%;
+    height: 60vh;
+    border-radius:0 0 0 70px ;
+    background-color:  hsl(356, 100%, 66%);
+    background-image: url(/images/bg-pattern-intro-desktop.svg);
+    background-position:1rem; /*this is not a problem for height issue in header=back-position(1rem)*/
+    background-size: cover;
+}
+nav{
+  /*  border: 2px solid blue; */ 
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+}
+.logo{
+   height: 2.5em;
+   margin:0 1.5em ;
+}
+.nav-links ul{
+    display:flex;
+    list-style: none;
+}
+.nav-links ul li{
+  /*  border: 1px solid black; */
+    padding: 0em 2rem;
+    margin-top: 0.7rem;
+}
+.nav-links ul li a{
+    text-decoration: none;
+    font-family:arial;
+    font-weight: bold;
+    color: white;
+}
+.nav-links ul li a:hover{
+    color: rgb(156, 58, 58);
+}
+
+/*======================= SUB-MENU======================== */
+
+.sub-menu-1{
+    position: absolute; /* this is not important because this note displayed in here. reason=display:none; */
+    display: none;
+}
+.nav-links ul li:hover .sub-menu-1 {
+    display: block;
+    position: absolute;
+    background: rgb(37, 36, 35);
+    padding: 20px 0px;
+    margin-left: 0px;
+    z-index: 1;
+}
+.nav-links ul li:hover .sub-menu-1 ul{
+    display: block;
+}
+.nav-links ul li:hover .sub-menu-1 ul li{
+    padding: 2px 2rem;
+  /*  border-bottom: none; */ /*this is hover the submenu border bottom raw*/
+}
+.sub-menu-1 ul li a:hover{
+    color: hsl(356, 100%, 66%);
+  /*  border-bottom: 1px solid hsl(356, 100%, 66%) ; */ /*this is hover the submenu border bottom raw*/
+}
+
+
+/* ======================SUB-MENU========================*/
+
+
+.login-signup{
+   /* border: 1px solid green; */
+    display: flex;
+    place-items: center;
+}
+.login-signup a{
+    text-decoration: none;
+    margin-right: 25px;
+    color: hsl(356, 100%, 66%);
+    font-family: arial;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px 1em;
+    border-radius: 20px;
+}
+.login-signup a:hover{
+    background-color: rgb(255, 176, 176);
+    color: black;
+}
+.header-textbox{
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 20px;
+    margin: 5em 5em;
+    min-height: 300px;
+   /* border: 2px solid rgb(0, 0, 255); */
+}
+.header-textbox h1,p{
+    text-align: center;
+}
+.header-textbox h1{
+    color: rgb(255, 232, 232);
+    font-family: sans-serif;
+    margin-top: 0;
+}
+.header-textbox p{
+    color: rgb(255, 217, 217);
+    padding-top: 20px;
+}
+.header-textbox-2btns{
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+   /* border: 2px solid black; */
+    margin-top: 2em; 
+
+}
+.header-textbox-2btns a{
+    text-decoration: none;
+    margin-right: 25px;
+    color: hsl(356, 100%, 66%);
+    font-family: arial;
+    font-weight: bold;
+    background-color: white;
+    padding: 8px 1em;
+    border-radius: 20px;
+}
+.header-textbox-2btns a:hover{
+    background-color: rgb(255, 176, 176);
+    color: black;
+}
+/* ================section-1========================*/
+.section-1{
+    background-color: rgb(0, 0, 0);
+   /* border: 2px solid red; */
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 30vh 70vh;
+    grid-template-areas: 
+    "header header"
+    "text svg" ;
+    overflow: auto;
+}
+.section-1 h1{
+    text-align: center;
+}
+.section-1-topic{
+    grid-area: header;
+    display: grid;
+    place-items: center;
+}
+.section-1-topic h1{
+    font-family: arial;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(209, 209, 209);
+}
+.section-1-textbox{
+    padding: 0 50px 0 100px;
+}
+.section-1-textbox h3{
+    font-family: monospace;
+    font-size: 16px;
+    text-align: left;
+    color:hsl(356, 100%, 66%);
+}
+.section-1-textbox p{
+    font-family: arial;
+    font-size: 13px;
+    text-align: left;
+    padding: 1em;
+    color: wheat;
+    line-height: 1.7em;
+}
+.section-1-svg{
+    width: 40em;
+    margin-top: -1em;
+    margin-right: -200em;
+
+}
+
+/* ================section-2========================*/
+.section-2{
+    width: 100%;
+    height: 268px;
+    border-radius: 0 70px 0 70px;
+    background-image: linear-gradient(to right, rgb(15, 15, 26) , rgb(48, 48, 48));
+    display: flex;
+    overflow: hidden; 
+}
+.section-2-textbox{
+    padding: 7rem 7rem 0em 5rem;
+    color: wheat;
+}
+.section-2-textbox h3{
+    font-family: monospace;
+    font-size: 25px;
+    text-align: left;
+    color:hsl(0, 0%, 100%);
+    margin-top: -2em;
+    margin-bottom: 1em;
+}
+    
+
+.section-2-textbox p{
+    font-family: arial;
+    font-size: 14px;
+    text-align: left;
+    line-height: 1.7em;
+}
+.section-2-img-svg{
+    position: relative;
+    width: 40rem;
+    margin-top: -20rem;
+    z-index: 0;
+
+}
+.section-2-img-svg-phones{
+    position: relative;
+    z-index: 1;
+    width: 31rem;
+    margin-top: 0rem;
+    margin-left: 1rem;
+}
+
+/*================section-3========================*/
+.section-3{
+    display: flex;
+    margin: 10rem 8rem ;
+    text-align: left;
+}
+.section-3-textbox{
+    padding: 0 50px 0 100px;
+
+}
+.section-3-textbox h3{
+    color: hsl(356, 100%, 66%);
+    font-family: monospace;
+    font-size: 16px;
+    width: auto;
+    
+}
+.section-3-textbox p{
+    color: wheat;
+    text-align: left;
+    padding: 20px 10px;
+    font-size: 14px;
+    font-family: arial;
+    line-height: 1.7em;
+}
+.section-3-topic{
+    font-family: monospace;
+    font-size: 25px;
+    text-align: left;
+    color:hsl(0, 0%, 100%);
+    margin-top: -2em;
+    margin-bottom: 1em;
+}
+.section-3-img-svg{
+    width: 35em;
+    margin-top: -2.5em;
+}
+
+footer{
+    height: 300px;
+    width: 100%;
+    display: flex;
+   /*border-radius: 0 70px 0 0; */ 
+    background-image: linear-gradient(rgb(0, 0, 0) 20px 10px ,hsl(356, 100%, 66%));
+    overflow: hidden;
+}
+.footer-logo{
+    margin: 8rem;
+}
+.row{
+    margin: 6em;
+}
+.row h3{
+    color: wheat;
+    font-family: monospace;
+    font-size: 16px;
+}
+.row ul{
+    list-style: none;
+    margin-top: 20px;
+}
+.row ul li{
+    margin-top: 10px;
+}
+.row ul li a{
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: black;
+}
+.row ul li a:hover{
+    color: hotpink;
+}
