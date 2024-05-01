@@ -1,19 +1,14 @@
-<%-- 
-    Document   : dashboard
-    Created on : Apr 28, 2024, 1:14:27 PM
-    Author     : Acer
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Add your CSS and JavaScript links here -->
 </head>
 <body>
-    <h2>Welcome, ${sessionScope.username}!</h2>
-    <!-- Add dashboard content here -->
+    <h2>Welcome to Dashboard</h2>
+    <!-- Add your dashboard content here -->
 </body>
 </html>
-

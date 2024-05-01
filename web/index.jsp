@@ -11,12 +11,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>online store</title>
+  <title>Electro Mart</title>
 </head>
     <body>
   <header>
     <nav class="nav">
-      <img src="/images/logo.svg" class="logo">
+      <img src="images/logo.jpg" class="logo">
       <div class="nav-links">
         <ul>
           <li><a href="#">Product</a>
@@ -24,7 +24,7 @@
               <ul>
                 <li><a href="">Overview</a></li>
                 <li><a href="">Pricing</a></li>
-                <li><a href="/market.html">Marketplace</a></li>
+                <li><a href="market.html">Marketplace</a></li>
                 <li><a href="">Features</a></li>
                 <li><a href="">Integrations</a></li>
               </ul>
@@ -40,20 +40,20 @@
               </ul>
             </div>
           </li>
-          <li><a href="#">Connect</a>
+          <li><a href="#">Admin</a>
             <div class="sub-menu-1">
               <ul>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Newsletter</a></li>
-                <li><a href="">LinkedIn</a></li>
+                <li><a href="SignUpAsAdmin.jsp">Signup As Admin</a></li>
+                <li><a href="LoginAsAdmin.jsp">Loging As Adminr</a></li>
+                <li><a href="LogingAsSuperAdmin.jsp">super admiin login</a></li>
               </ul>
             </div>
           </li>
         </ul>
       </div>
       <div class="login-signup">
-        <a href="">Login</a> 
-        <a href="">Sign Up</a>
+        <a href="login.jsp">Login</a> 
+        <a href="signup.jsp">Sign Up</a>
       </div>
     </nav>
 
@@ -80,7 +80,7 @@
       </div>
 
     <div class="section-1-svg">
-      <img class="section-1-svg" src="/images/microchip-processor-wallpaper.jpg">
+      <img class="section-1-svg" src="images/microchip-processor-wallpaper.jpg">
     </div>
 
  </section>
@@ -89,7 +89,7 @@
 
  <div class="section-2-svg">
   
-  <img class="section-2-img-svg-phones" src="/images/sensors.jpg" alt=""> 
+  <img class="section-2-img-svg-phones" src="images/sensors.jpg" alt=""> 
  </div>
  <div class="section-2-textbox">
   <h3>Sensors & Modules</h3>
@@ -107,13 +107,13 @@
    capable of producing even the most complicated sites.</p>
   </div>
   <div class="section-3-svg">
-    <img src="/images/components.jpg" alt="" class="section-3-img-svg">
+    <img src="images/components.jpg" alt="" class="section-3-img-svg">
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">
-    <img src="/images/logo.svg" alt="">
+    <img src="images/logo.svg" alt="">
   </div>
 
   <div class="row"> 

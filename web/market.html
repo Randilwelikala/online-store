@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Shop - Products</title>
+    <link rel="stylesheet" href="market.css">
+    <script>
+    function addToCart() {
+        window.location.href = "checkout.jsp";
+    }
+</script>
+
+</head>
+<body>
+    <header>
+        <h1>Electronic Shop</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="category-dropdown">
+            <select>
+                <option value="all">All Categories</option>
+                <option value="phones">Phones</option>
+                <option value="laptops">Laptops</option>
+                <option value="tablets">Tablets</option>
+                <option value="accessories">Accessories</option>
+            </select>
+        </div>
+        <div class="product-cards">
+            <div class="card">
+                <img src="phone1.jpg" alt="Phone 1">
+                <h3>Smartphone Model 1</h3>
+                <p>$499</p>
+                <button class="add-to-cart-btn" data-id="1" onclick="addToCart()">Add to Cart</button>
+
+            </div>
+            <div class="card">
+                <img src="laptop1.jpg" alt="Laptop 1">
+                <h3>Laptop Model 1</h3>
+                <p>$899</p>
+                <button class="add-to-cart-btn" data-id="2">Add to Cart</button>
+            </div>
+            <!-- Add more product cards here -->
+            <div class="card">
+                <img src="tablet1.jpg" alt="Tablet 1">
+                <h3>Tablet Model 1</h3>
+                <p>$349</p>
+                <button class="add-to-cart-btn" data-id="3">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="accessory1.jpg" alt="Accessory 1">
+                <h3>Accessory Model 1</h3>
+                <p>$29</p>
+                <button class="add-to-cart-btn" data-id="4">Add to Cart</button>
+            </div>
+            <!-- Add more product cards here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
